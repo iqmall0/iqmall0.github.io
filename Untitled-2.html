@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pengerekodan Ternakan Ruminan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        form div {
+            margin-bottom: 10px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .actions button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistem Pengerekodan Ternakan Ruminan</h1>
+    </header>
+    <div class="container">
+        <form id="recordForm">
+            <h2>Tambah Rekod Ternakan</h2>
+            <div>
+                <label for="animalId">ID Ternakan</label>
+                <input type="text" id="animalId" name="animalId" required>
+            </div>
+            <div>
+                <label for="animalType">Jenis Ternakan</label>
+                <select id="animalType" name="animalType" required>
+                    <option value="Lembu">Lembu</option>
+                    <option value="Kambing">Kambing</option>
+                    <option value="Biri-biri">Biri-biri</option>
+                </select>
+            </div>
+            <div>
+                <label for="animalAge">Umur Ternakan (bulan)</label>
+                <input type="number" id="animalAge" name="animalAge" required>
+            </div>
+            <div>
+                <label for="animalWeight">Berat Ternakan (kg)</label>
+                <input type="number" id="animalWeight" name="animalWeight" required>
+            </div>
+            <div>
+                <label for="animalHealth">Status Kesihatan</label>
+                <select id="animalHealth" name="animalHealth" required>
+                    <option value="Sihat">Sihat</option>
+                    <option value="Sakit">Sakit</option>
+                    <option value="Dalam Rawatan">Dalam Rawatan</option>
+                </select>
+            </div>
+            <div class="actions">
+                <button type="submit">Tambah Rekod</button>
+                <button type="button" id="nfcReadButton">Baca dari NFC</button>
+            </div>
+        </form>
+        <h2>Senarai Rekod Ternakan</h2>
+        <table id="animalTable">
+            <thead>
+                <tr>
+                    <th>ID Ternakan</th>
+                    <th>Jenis Ternakan</th>
+                    <th>Umur (bulan)</th>
+                    <th>Berat (kg)</th>
+                    <th>Status Kesihatan</th>
+                    <th>Tindakan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rekod ternakan akan ditambah di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('recordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const animalId = document.getElementById('animalId').value;
+            const animalType = document.getElementById('animalType').value;
+            const animalAge = document.getElementById('animalAge').value;
+            const animalWeight = document.getElementById('animalWeight').value;
+            const animalHealth = document.getElementById('animalHealth').value;
+            
+            addRecord(animalId, animalType, animalAge, animalWeight, animalHealth);
+            document.getElementById('recordForm').reset();
+        });
+
+        function addRecord(animalId, animalType, animalAge, animalWeight, animalHealth) {
+            const table = document.getElementById('animalTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            
+            newRow.insertCell(0).textContent = animalId;
+            newRow.insertCell(1).textContent = animalType;
+            newRow.insertCell(2).textContent = animalAge;
+            newRow.insertCell(3).textContent = animalWeight;
+            newRow.insertCell(4).textContent = animalHealth;
+            const actionsCell = newRow.insertCell(5);
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Padam';
+            deleteButton.onclick = function() {
+                table.deleteRow(newRow.rowIndex - 1);
+                saveRecords();
+            };
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.onclick = function() {
+                editRecord(newRow);
+            };
+            actionsCell.appendChild(editButton);
+            actionsCell.appendChild(deleteButton);
+
+            saveRecords();
+        }
+
+        function saveRecords() {
+            const table = document.getElementById('animalTable').getElementsByTagName('tbody')[0];
+            const records = [];
+            for (let i = 0; i < table.rows.length; i++) {
+                const row = table.rows[i];
+                const record = {
+                    animalId: row.cells[0].textContent,
+                    animalType: row.cells[1].textContent,
+                    animalAge: row.cells[2].textContent,
+                    animalWeight: row.cells[3].textContent,
+                    animalHealth: row.cells[4].textContent
+                };
+                records.push(record);
+            }
+            localStorage.setItem('animalRecords', JSON.stringify(records));
+        }
+
+        function loadRecords() {
+            const records = JSON.parse(localStorage.getItem('animalRecords')) || [];
+            for (const record of records) {
+                addRecord(record.animalId, record.animalType, record.animalAge, record.animalWeight, record.animalHealth);
+            }
+        }
+
+        function editRecord(row) {
+            document.getElementById('animalId').value = row.cells[0].textContent;
+            document.getElementById('animalType').value = row.cells[1].textContent;
+            document.getElementById('animalAge').value = row.cells[2].textContent;
+            document.getElementById('animalWeight').value = row.cells[3].textContent;
+            document.getElementById('animalHealth').value = row.cells[4].textContent;
+            
+            document.getElementById('recordForm').addEventListener('submit', function updateRow(event) {
+                event.preventDefault();
+                
+                row.cells[0].textContent = document.getElementById('animalId').value;
+                row.cells[1].textContent = document.getElementById('animalType').value;
+                row.cells[2].textContent = document.getElementById('animalAge').value;
+                row.cells[3].textContent = document.getElementById('animalWeight').value;
+                row.cells[4].textContent = document.getElementById('animalHealth').value;
+                
+                document.getElementById('recordForm').reset();
+                document.getElementById('recordForm').removeEventListener('submit', updateRow);
+                
+                saveRecords();
+            }, { once: true });
+        }
+
+        document.getElementById('nfcReadButton').addEventListener('click', async function() {
+            if ('NDEFReader' in window) {
+                try {
+                    const ndef = new NDEFReader();
+                    await ndef.scan();
+                    ndef.onreading = event => {
+                        const decoder = new TextDecoder();
+                        for (const record of event.message.records) {
+                            const data = decoder.decode(record.data);
+                            const animalData = JSON.parse(data);
+
+                            document.getElementById('animalId').value = animalData.animalId;
+                            document.getElementById('animalType').value = animalData.animalType;
+                            document.getElementById('animalAge').value = animalData.animalAge;
+                            document.getElementById('animalWeight').value = animalData.animalWeight;
+                            document.getElementById('animalHealth').value = animalData.animalHealth;
+                        }
+                    };
+                } catch (error) {
+                    console.error("NFC reading failed: ", error);
+                }
+            } else {
+                alert('NFC tidak disokong pada peranti ini.');
+            }
+        });
+
+        window.onload = loadRecords;
+    </script>
+</body>
+</html>
