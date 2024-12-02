@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pengurusan Maklumat Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #79acdf;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin: 20px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #94ddf1;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-bottom: 5px;
+        }
+        form input, form select, form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Sistem Pengurusan Maklumat Ternakan</h1>
+    </header>
+
+    <nav>
+        <a href="#add-livestock">Tambah Ternakan</a>
+        <a href="#livestock-list">Senarai Ternakan</a>
+    </nav>
+
+    <main>
+        <!-- Form untuk menambah maklumat ternakan -->
+        <section id="add-livestock">
+            <h2>Tambah Maklumat Ternakan</h2>
+            <form action="proses_tambah.php" method="POST">
+                <label for="id-ternakan">ID Ternakan</label>
+                <input type="text" id="id-ternakan" name="id_ternakan" required>
+
+                <label for="nama-ternakan">Nama Ternakan</label>
+                <input type="text" id="nama-ternakan" name="nama_ternakan" required>
+
+                <label for="jenis-ternakan">Jenis Ternakan</label>
+                <select id="jenis-ternakan" name="jenis_ternakan">
+                    <option value="lembu">Lembu</option>
+                    <option value="kambing">Kambing</option>
+                </select>
+
+                <label for="umur-ternakan">Umur (Tahun)</label>
+                <textarea id="tarikh" name="tarikh"></textarea>
+
+                <label for="berat-ternakan">Berat (kg)</label>
+                <input type="number" id="berat-ternakan" name="berat_ternakan" required>
+
+                <label for="catatan">Catatan</label>
+                <textarea id="catatan" name="catatan"></textarea>
+
+                <button type="submit">Tambah Ternakan</button>
+            </form>
+        </section>
+
+        <!-- Senarai Ternakan -->
+        <section id="livestock-list">
+            <h2>Senarai Maklumat Ternakan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Ternakan</th>
+                        <th>Nama Ternakan</th>
+                        <th>Jenis</th>
+                        <th>Umur</th>
+                        <th>Berat</th>
+                        <th>Catatan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Baris contoh, data sebenar diambil dari pangkalan data -->
+                    <tr>
+                        <td>048</td>
+                        <td>Dopper</td>
+                        <td>kambing</td>
+                        <td>3</td>
+                        <td>43kg</td>
+                        <td>Sehat</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Kambing B</td>
+                        <td>Kambing</td>
+                        <td>2</td>
+                        <td>45</td>
+                        <td>Agak kurus</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
