@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Rekod Pembiakan Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Rekod Pembiakan Ternakan</h1>
+    <form id="breedingForm">
+        <label for="animalID">ID Ternakan:</label>
+        <input type="text" id="animalID" name="animalID" required><br><br>
+
+        <label for="breedingDate">Tarikh Pembiakan:</label>
+        <input type="date" id="breedingDate" name="breedingDate" required><br><br>
+
+        <label for="breedingType">Jenis Pembiakan:</label>
+        <input type="text" id="breedingType" name="breedingType" required><br><br>
+
+        <label for="successStatus">Status Kejayaan:</label>
+        <select id="successStatus" name="successStatus" required>
+            <option value="Berjaya">Berjaya</option>
+            <option value="Tidak Berjaya">Tidak Berjaya</option>
+        </select><br><br>
+
+        <button type="button" onclick="addBreedingRecord()">Tambah Rekod</button>
+    </form>
+
+    <table id="breedingTable">
+        <thead>
+            <tr>
+                <th>ID Ternakan</th>
+                <th>Tarikh Pembiakan</th>
+                <th>Jenis Pembiakan</th>
+                <th>Status Kejayaan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rekod akan ditambah di sini -->
+        </tbody>
+    </table>
+
+    <script>
+        function addBreedingRecord() {
+            // Ambil data dari borang
+            const animalID = document.getElementById("animalID").value;
+            const breedingDate = document.getElementById("breedingDate").value;
+            const breedingType = document.getElementById("breedingType").value;
+            const successStatus = document.getElementById("successStatus").value;
+
+            // Cipta baris baru untuk rekod
+            const table = document.getElementById("breedingTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // Masukkan data ke dalam sel
+            const animalIDCell = newRow.insertCell(0);
+            const breedingDateCell = newRow.insertCell(1);
+            const breedingTypeCell = newRow.insertCell(2);
+            const successStatusCell = newRow.insertCell(3);
+
+            animalIDCell.textContent = animalID;
+            breedingDateCell.textContent = breedingDate;
+            breedingTypeCell.textContent = breedingType;
+            successStatusCell.textContent = successStatus;
+
+            // Kosongkan borang selepas rekod ditambah
+            document.getElementById("breedingForm").reset();
+        }
+    </script>
+</body>
+</html>
