@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekod Kesihatan Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .add-record {
+            margin-top: 20px;
+        }
+        .add-record input, .add-record button {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .add-record button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .add-record button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Rekod Kesihatan Ternakan</h1>
+</header>
+
+<div class="container">
+    <h2>Maklumat Rekod</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nama Ternakan</th>
+                <th>Jenis Ternakan</th>
+                <th>Tarikh Pemeriksaan</th>
+                <th>Catatan Kesihatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Lembu A</td>
+                <td>Lembu</td>
+                <td>01/12/2024</td>
+                <td>Keadaan sihat, tiada simptom penyakit.</td>
+            </tr>
+            <tr>
+                <td>Kambing B</td>
+                <td>Kambing</td>
+                <td>29/11/2024</td>
+                <td>Memerlukan rawatan cacing.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="add-record">
+        <h3>Tambah Rekod Baru</h3>
+        <form action="#" method="post">
+            <label for="nama">Nama Ternakan:</label><br>
+            <input type="text" id="nama" name="nama" required><br>
+            <label for="jenis">Jenis Ternakan:</label><br>
+            <input type="text" id="jenis" name="jenis" required><br>
+            <label for="tarikh">Tarikh Pemeriksaan:</label><br>
+            <input type="date" id="tarikh" name="tarikh" required><br>
+            <label for="catatan">Catatan Kesihatan:</label><br>
+            <textarea id="catatan" name="catatan" rows="4" required></textarea><br>
+            <button type="submit">Tambah Rekod</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Rekod Kesihatan Ternakan. Hak Cipta Terpelihara.</p>
+</footer>
+
+</body>
+</html>
