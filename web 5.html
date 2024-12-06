@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekod Berat Ternakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-top: 20px;
+        }
+        form input, form select, form button {
+            padding: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rekod Berat Ternakan</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>No Tag</th>
+                <th>Baka</th>
+                <th>Jantina (J/B)</th>
+                <th>Berat (kg)</th>
+                <th>Catatan</th>
+            </tr>
+        </thead>
+        <tbody id="rekodTernakan">
+            <tr>
+                <td>1</td>
+                <td>057</td>
+                <td>DOPPER</td>
+                <td>B</td>
+                <td>36</td>
+                <td>SCHOOL ENTREPRISE</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>049</td>
+                <td>DOPPER</td>
+                <td>B</td>
+                <td>41</td>
+                <td>SCHOOL ENTREPRISE</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>055</td>
+                <td>DOPPER</td>
+                <td>B</td>
+                <td>30</td>
+                <td>SCHOOL ENTREPRISE</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form id="rekodForm">
+        <label for="noTag">No Tag:</label>
+        <input type="text" id="noTag" name="noTag" required>
+
+        <label for="baka">Baka:</label>
+        <input type="text" id="baka" name="baka" required>
+
+        <label for="jantina">Jantina (J/B):</label>
+        <select id="jantina" name="jantina" required>
+            <option value="">Pilih</option>
+            <option value="J">J</option>
+            <option value="B">B</option>
+        </select>
+
+        <label for="berat">Berat (kg):</label>
+        <input type="number" id="berat" name="berat" required>
+
+        <label for="catatan">Catatan:</label>
+        <input type="text" id="catatan" name="catatan" required>
+
+        <button type="button" onclick="tambahRekod()">Tambah Rekod</button>
+    </form>
+
+    <script>
+        function tambahRekod() {
+            const noTag = document.getElementById('noTag').value;
+            const baka = document.getElementById('baka').value;
+            const jantina = document.getElementById('jantina').value;
+            const berat = document.getElementById('berat').value;
+            const catatan = document.getElementById('catatan').value;
+
+            if (noTag && baka && jantina && berat && catatan) {
+                const table = document.getElementById('rekodTernakan');
+                const rowCount = table.rows.length + 1;
+
+                const newRow = 
+                    <tr>
+                        <td>${rowCount}</td>
+                        <td>${noTag}</td>
+                        <td>${baka}</td>
+                        <td>${jantina}</td>
+                        <td>${berat}</td>
+                        <td>${catatan}</td>
+                    </tr>
+                ;
+
+                table.insertAdjacentHTML('beforeend', newRow);
+
+                // Kosongkan borang selepas tambah rekod
+                document.getElementById('rekodForm').reset();
+            } else {
+                alert('Sila isi semua maklumat!');
+            }
+        }
+    </script>
+</body>
+</html>
