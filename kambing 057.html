@@ -1,0 +1,118 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maklumat Kambing: 057</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f3;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #3b5998;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #3b5998;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>maklumat ternakan Kambing: 057</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>No Tag: 057</h2>
+            <p>Kambing ini memiliki No Tag <strong>057</strong> sebagai penanda unik untuk identifikasi di sistem ternakan unit ruminan KVLD.</p>
+        </section>
+
+        <section>
+            <h2>Berat: 36 kG</h2>
+            <p>Kambing ini mempunyai berat <strong>36 KG</strong>. berat kambing ini diambil november 2024,.</p>
+        </section>
+
+        <section>
+            <h2>Jantina:Betina</h2>
+            <p>Jantan ternakan <strong>Betina</strong>.
+        </section>
+
+        <section>
+            <h2>Baka: Dopper</h2>
+            <p>Kambing ini adalah dari baka <strong>Dopper</strong>,.</p>
+        </section>
+
+        <section>
+            <h2>Kesihatan: Sihat</h2>
+            <p>Status kesihatan kambing ini adalah <strong>sihat</strong>. Kambing ini telah mendapatkan vaksinasi rutin dan selalu dalam pengawasan kesehatan untuk memastikan kesejahteraannya.</p>
+        </section>
+    </main>
+    <h2>Hantar Maklumat Baru</h2>
+<form action="https://formspree.io/f/abc123" method="POST">
+    <!-- Tukar 'abc123' kepada ID borang sebenar anda -->
+    
+    <!-- Nama -->
+    <label for="name">Nama:</label><br>
+    <input type="text" id="name" name="name" required><br><br>  
+
+    <!-- No ID Ternakan (Auto diisi) -->
+    <label for="id">No ID Ternakan:</label><br>
+    <input type="text" id="id" name="id" readonly><br><br>
+
+    <!-- Tarikh (Auto diisi dengan tarikh hari ini) -->
+    <label for="date">Tarikh:</label><br>
+    <input type="date" id="date" name="date" readonly><br><br>
+
+    <!-- Maklumat -->
+    <label for="message">Maklumat:</label><br>
+    <textarea id="message" name="message" required></textarea><br><br>
+
+    <button type="submit">Hantar Maklumat</button>
+</form>
+
+<script>
+    // Auto masukkan No ID Ternakan dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const ternakanID = urlParams.get('id') || '057'; // Ganti '057' dengan ID lalai jika tiada dalam URL
+    document.getElementById('id').value = ternakanID;
+
+    // Auto masukkan tarikh hari ini
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').value = today;
+</script>
+
+<header>
+    <h1>2025 Unit Ruminan KVLD - Semua Hak Dilindungi Hak milik @iqmmal_f</h1>
+</header>
